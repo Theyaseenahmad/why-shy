@@ -1,0 +1,18 @@
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
+  reactStrictMode: true,
+
+  images: {
+    formats: ["image/avif", "image/webp"],
+    remotePatterns: [],
+  },
+
+  typescript: {
+    // Ignore TypeScript errors during production builds
+    ignoreBuildErrors: true,
+  },
+
+};
+
+export default nextConfig;

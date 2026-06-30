@@ -1,0 +1,209 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Fonts ─── */
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Caveat:wght@500;600;700&display=swap");
+
+/* ─── Design Tokens ─── */
+:root {
+  --hot-pink: #E0457B;
+  --bubblegum: #F4A6C6;
+  --baby-pink: #FCE4ED;
+  --blush: #FDF1F5;
+  --rust: #C8552D;
+  --magenta: #A8285A;
+  --deep-pink: #C23467;
+  --cream: #FFFBF8;
+  --muted-rose: #9A5876;
+  --soft-rose: #A86485;
+  --pale-rose: #C4849E;
+
+  --font-serif: "Fraunces", Georgia, serif;
+  --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-script: "Caveat", cursive;
+
+  --ease-drift: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ─── Base Reset ─── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background: var(--cream);
+  color: var(--magenta);
+  scroll-behavior: auto;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--cream);
+  color: var(--magenta);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Selection ─── */
+::selection {
+  background: var(--hot-pink);
+  color: #fff;
+}
+
+/* ─── Focus visible (accessibility) ─── */
+:focus-visible {
+  outline: 2px solid var(--hot-pink);
+  outline-offset: 3px;
+}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--blush);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--bubblegum);
+  border-radius: 100px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--hot-pink);
+}
+
+/* ─── Typography helpers ─── */
+.font-serif {
+  font-family: var(--font-serif);
+}
+.font-sans {
+  font-family: var(--font-sans);
+}
+.font-script {
+  font-family: var(--font-script);
+}
+
+/* ─── Lenis smooth scroll setup ─── */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* ─── Bouncy press button (hero CTA) ─── */
+.btn-press {
+  box-shadow: 0 8px 0 var(--magenta);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.btn-press:hover {
+  transform: translateY(2px);
+  box-shadow: 0 6px 0 var(--magenta);
+}
+.btn-press:active {
+  transform: translateY(6px);
+  box-shadow: 0 2px 0 var(--magenta);
+}
+
+/* ─── Sticker float animations ─── */
+@keyframes float0 {
+  0%, 100% { transform: translateY(0) rotate(var(--r, 0deg)); }
+  50% { transform: translateY(-14px) rotate(var(--r, 0deg)); }
+}
+@keyframes float1 {
+  0%, 100% { transform: translateY(0) rotate(var(--r, 0deg)); }
+  50% { transform: translateY(-10px) rotate(calc(var(--r, 0deg) + 4deg)); }
+}
+@keyframes float2 {
+  0%, 100% { transform: translateY(0) rotate(var(--r, 0deg)); }
+  50% { transform: translateY(-8px) rotate(calc(var(--r, 0deg) - 4deg)); }
+}
+
+/* ─── Reveal animation ─── */
+.reveal-up {
+  opacity: 0;
+  transform: translateY(2rem);
+  transition: opacity 0.7s var(--ease-drift), transform 0.7s var(--ease-drift);
+}
+.reveal-up.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── Speech bubble ─── */
+.bubble-tail::after {
+  content: "";
+  position: absolute;
+  bottom: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 14px solid transparent;
+  border-right: 14px solid transparent;
+  border-top: 18px solid #fff;
+}
+
+/* ─── Section divider ─── */
+.mag-divider {
+  height: 2px;
+  background: var(--baby-pink);
+  margin: 0 3rem;
+}
+
+@media (max-width: 768px) {
+  .mag-divider {
+    margin: 0 1.5rem;
+  }
+}
+
+/* ─── Utility ─── */
+.text-hot-pink { color: var(--hot-pink); }
+.text-magenta { color: var(--magenta); }
+.text-muted-rose { color: var(--muted-rose); }
+.bg-blush { background-color: var(--blush); }
+.bg-cream { background-color: var(--cream); }
+.border-baby-pink { border-color: var(--baby-pink); }
+
+/* ─── Reduced motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal-up {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ─── Responsive grid overrides ─── */
+@media (max-width: 1000px) {
+  .brands-grid,
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+@media (max-width: 650px) {
+  .brands-grid,
+  .services-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
